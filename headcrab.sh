@@ -76,16 +76,17 @@ set -eu
             NativeClientCheck
         fi
             echo "SteamClientVersion: $versionnumber"
-            echo ""
             }
     
     CheckHeadcrabCompatibility(){
         CheckClientInfo
         if [[ "$versionnumber" == "$HeadcrabCompatibleClientVer" ]]; then
             echo "ClientCompatCheck: SteamClientVersion Compatible"
+            echo ""
             clientinstall
         else
             echo "ClientCompatCheck: SteamClientVersion Incompatible"
+            echo ""
             echo "Bootstrapping Injector"
             clientdowngrade
         fi
