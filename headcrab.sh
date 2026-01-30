@@ -34,8 +34,10 @@ set -eu
     SteamOSClientCheck(){
         if [ -f "steam_client_steamdeck_stable_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_steamdeck_stable_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Stable"
         else
             versionnumber=$(grep '"version"' steam_client_steamdeck_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Beta"
         fi
             echo "SteamClientType: SteamOS"
         }
@@ -43,8 +45,10 @@ set -eu
     FlatpakClientCheck(){
         if [ -f "steam_client_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Stable"
         else
             versionnumber=$(grep '"version"' steam_client_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Beta"
         fi
             echo "SteamClientType: Flatpak"
         }
@@ -52,13 +56,16 @@ set -eu
     NativeClientCheck(){
         if [ -f "steam_client_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Stable"
         else
             versionnumber=$(grep '"version"' steam_client_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Beta"
         fi
             echo "SteamClientType: Native"
         }
 
     CheckClientInfo(){
+        echo "SteamClientInfo:"
         wheresteamcfg
         cd package/
         if steamoscheck; then
@@ -69,6 +76,7 @@ set -eu
             NativeClientCheck
         fi
             echo "SteamClientVersion: $versionnumber"
+            echo ""
             }
     
     CheckHeadcrabCompatibility(){
