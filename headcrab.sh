@@ -161,11 +161,11 @@ set -eu
             echo "Steamos Detected"
             echo "Headcrab Bootstrapping SLSsteam.."
             createsteamcfg
-           export_sls wheresteam -clearbeta steam://exit &> /dev/null
+           export_sls wheresteam -clearbeta steam://exit 
         else
             echo "Headcrab Bootstrapping SLSsteam.."
             createsteamcfg
-            export_sls wheresteam -clearbeta steam://exit &> /dev/null
+            export_sls wheresteam -clearbeta steam://exit
         fi
             echo "" &> /dev/null
             }
@@ -181,7 +181,7 @@ set -eu
         
     wheresteam(){
         if [ -d "$FlatpakSteamInstallDir" ]; then
-                flatpak run com.valvesoftware.Steam "$@"
+                com.valvesoftware.Steam "$@"
         else
                 steam "$@"
             fi
