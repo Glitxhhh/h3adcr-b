@@ -267,7 +267,6 @@ set -eu
     
     export_sls(){
         if [ -f "$RepoSLSsteamLocation/libSLSsteam.so" ]; then
-        
                 LD_AUDIT=/usr/lib32/libSLS-library-inject.so:/usr/lib32/libSLSsteam.so "$@"
         elif [ -d "$FlatpakSteamInstallDir" ]; then
                 copySLSsteam
