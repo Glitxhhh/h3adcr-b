@@ -208,6 +208,7 @@ set -eu
             }
             
     checkforsteamcfg(){
+    echo "the headcrab approaches.."
     wheresteamcfg
     if [ -f "steam.cfg" ]; then
         rm steam.cfg
@@ -215,9 +216,8 @@ set -eu
         echo "No Pre Exisiting Steam.cfg"
     fi
         nuketheclient
-        echo "the headcrab approaches.."
-        echo "the headcrab latches on the steam process.."
         CheckHeadcrabCompatibility
+        echo "the headcrab latches on the steam process.."
         conditioncheck
         }
 
@@ -229,7 +229,7 @@ set -eu
     $(curl -s "https://api.github.com/repos/AceSLS/SLSsteam/releases/latest" \
     | grep "browser_download_url" \
     | grep "SLSsteam-Any.7z" \
-    | cut -d '"' -f 4)
+    | cut -d '"' -f 4) &> /dev/null
     }
     
     export_sls(){
@@ -247,7 +247,7 @@ set -eu
                 }
 
     extractSLSsteam(){
-        downloadSLSsteam &> /dev/null
+        downloadSLSsteam
          7z x $SCRIPT_DIR/SLSsteam-Any.7z -aoa
          rm -rf tools
          rm -rf res
