@@ -358,6 +358,7 @@ patchflatpaksteam(){
 
         conditioncheck(){
             echo "Checking Conditions..."
+            patchsteam
             echo "BlockedClientUpdates: Enabled"
             editconfig
             echo "HeadcrabStatus: Patched"
