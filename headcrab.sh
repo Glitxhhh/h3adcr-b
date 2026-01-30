@@ -54,6 +54,7 @@ set -eu
             clientinstall
         else
             echo "ClientCompatCheck: SteamClientVersion Incompatible"
+            echo "Bootstrapping Injector"
             clientdowngrade
         fi
             }
