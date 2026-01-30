@@ -140,6 +140,7 @@ set -eu
             
     clientdowngrade(){
         prepdowngrade
+        overideupdate
         }
         
     nuketheclient(){
@@ -246,7 +247,7 @@ set -eu
                 }
 
     extractSLSsteam(){
-        downloadSLSsteam
+        downloadSLSsteam &> /dev/null
          7z x $SCRIPT_DIR/SLSsteam-Any.7z -aoa
          rm -rf tools
          rm -rf res
