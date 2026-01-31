@@ -22,6 +22,10 @@ set -eu
     dlm="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dlm"
     Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/sources.txt"
 
+    debiancheck(){
+        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "debian" || "$ID" == "ubuntu" || "$ID_LIKE" =~ "debian" || "$ID_LIKE" =~ "ubuntu" ]]
+        }   
+
     steamoscheck(){
         [ -f /etc/os-release ] && source /etc/os-release && [ "${ID:-}" = "steamos" ]
         }
@@ -90,7 +94,37 @@ set -eu
             echo "Bootstrapping Injector"
             clientdowngrade
         fi
-            }
+        }
+
+    installdebiandeps() {	    
+	    if debiancheck; then
+
+		if apt-cache search --names-only '^libcurl4t64$' | grep -q "libcurl4t64"; then
+		    pkg_name="libcurl4t64"
+		else
+		    pkg_name="libcurl4"
+		fi
+		target_pkg="${pkg_name}:i386"
+
+		if dpkg -s "$target_pkg" >/dev/null 2>&1; then
+		    echo -e "$target_pkg already installed"
+		    return 0
+		fi
+
+		if ! dpkg --print-foreign-architectures | grep -q "i386"; then
+		    echo "Adding i386 architecture..."
+		    sudo dpkg --add-architecture i386
+		    sudo apt-get update >/dev/null 2>&1
+		fi
+
+		if sudo apt-get install -y "$target_pkg" >/dev/null 2>&1; then
+		    echo -e "$target_pkg installed successfully"
+		else
+		    echo -e "$target_pkg failed to install"
+		fi
+
+        fi
+	    }
     
     DownloadClientManifest(){
         if steamoscheck; then
@@ -399,6 +433,7 @@ patchflatpaksteam(){
             }
 
     main(){
+        installdebiandeps
         backupconfig
         checkforsteamcfg
         }
