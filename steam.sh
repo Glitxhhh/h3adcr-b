@@ -422,10 +422,12 @@ function reset_steam()
 		log "Can't reset development directory"
 		return 1
 	fi
+	
 	if [ -z "$INITIAL_LAUNCH" ]; then
 		show_message --error $"Please exit Steam before resetting it."
 		return 1
 	fi
+	
 	if [ ! -f "$(detect_bootstrap)" ]; then
 		show_message --error $"Couldn't find bootstrap, it's not safe to reset Steam. Please contact technical support."
 		return 1
