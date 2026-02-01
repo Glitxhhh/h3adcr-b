@@ -191,15 +191,16 @@ set -eu
         
     clientinstall(){
         echo "the headcrab latches on the steam process.."
+		createsteamcfg
         if steamoscheck; then
             echo "Steamos Detected"
             echo "Headcrab Bootstrapping SLSsteam.."
-            createsteamcfg
-           export_sls wheresteam -clearbeta steam://exit 
-        else
+           export_sls wheresteam -clearbeta -exitsteam 
+        elif flatpakcheck; then
             echo "Headcrab Bootstrapping SLSsteam.."
-            createsteamcfg
             export_sls wheresteam -clearbeta steam://exit
+		else
+			export_sls wheresteam -clearbeta -exitsteam > /dev/null
         fi
             echo "" &> /dev/null
             }
