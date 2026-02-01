@@ -196,7 +196,7 @@ set -eu
         if steamoscheck; then
             echo "Steamos Detected"
             echo "Headcrab Bootstrapping SLSsteam.."
-           export_sls wheresteam -clearbeta -exitsteam 
+           export_sls wheresteam -exitsteam 
         elif flatpakcheck; then
             echo "Headcrab Bootstrapping SLSsteam.."
             export_sls wheresteam -clearbeta steam://exit
