@@ -4,8 +4,9 @@ set -eu
     #Headcrab Compatibile Client Version
     HeadcrabCompatibleClientVer=1769025840
     
-    #paths
+    #Paths
     SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+	ApplicationDirectory=$HOME/.local/share/applications
     SteamInstallDir=$HOME/.steam/steam
     FlatpakSteamInstallDir=$HOME/.var/app/com.valvesoftware.Steam/.steam/steam
     FlatpakSLSsteamInstallDir=$HOME/.var/app/com.valvesoftware.Steam/.local/share/SLSsteam
@@ -13,14 +14,25 @@ set -eu
     SLSsteamInstallDir=$HOME/.local/share/SLSsteam
     SLSsteamConfigDir=$HOME/.config/SLSsteam
     InstallDir=$SCRIPT_DIR/bin
-    RepoSLSsteamLocation=/usr/lib32
-    LinuxClientManifest="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/steam_client_ubuntu12"
-    DeckClientManifest="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/steam_client_steamdeck_stable_ubuntu12"
-    Headcrab_Downgrade_URL="http://localhost:1666/"
     Headcrab_Downgrader_Path=$HOME/.headcrab
-    dgsc="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/main/dgsc"
-    dlm="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/main/dlm"
-    Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/sources.txt"
+	
+	#URL'S
+    Headcrab_Downgrade_URL="http://localhost:1666/"
+	LinuxClientManifest="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/steam_client_ubuntu12"
+    DeckClientManifest="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/steam_client_steamdeck_stable_ubuntu12"
+	Steamos_Native_LaunchScript="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/steam.sh"
+    dgsc="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dgsc"
+    dlm="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dlm"
+    Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/sources.txt"
+	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/headcrab.desktop"
+	
+    archcheck(){
+        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "arch" || "$ID_LIKE" =~ "arch" ]] || [ -f /etc/arch-release ]
+        }
+
+    debiancheck(){
+        [ -f /etc/os-release ] && source /etc/os-release && [[ "${ID:-}" == "debian" || "${ID:-}" == "ubuntu" || "${ID_LIKE}" =~ "debian" || "${ID_LIKE}" =~ "ubuntu" ]]
+        }   
 
     steamoscheck(){
         [ -f /etc/os-release ] && source /etc/os-release && [ "${ID:-}" = "steamos" ]
@@ -29,6 +41,15 @@ set -eu
     flatpakcheck(){
         [ -d "$FlatpakSteamInstallDir" ]
         }
+		
+	SetupHeadcrab_Updater(){
+	cd $ApplicationDirectory/
+	wget "$Headcrab_Updater" &> /dev/null
+	chmod +x headcrab.desktop
+	update-desktop-database $ApplicationDirectory
+	echo "Headcrab Updater Now In Your Applications Menu"
+	echo "Can Open Up Headcrab Updater To Update To Latest Version."
+	}
         
     SteamOSClientCheck(){
         if [ -f "steam_client_steamdeck_stable_ubuntu12.manifest" ]; then
@@ -90,7 +111,53 @@ set -eu
             echo "Bootstrapping Injector"
             clientdowngrade
         fi
-            }
+        }
+
+    preinstallchecks(){
+        installdebiandeps
+        removearchpkg
+        }
+
+    installdebiandeps() {	    
+	    if debiancheck; then
+
+		if apt-cache search --names-only '^libcurl4t64$' | grep -q "libcurl4t64"; then
+		    pkg_name="libcurl4t64"
+		else
+		    pkg_name="libcurl4"
+		fi
+		target_pkg="${pkg_name}:i386"
+
+		if dpkg -s "$target_pkg" >/dev/null 2>&1; then
+		    echo -e "$target_pkg already installed"
+		    return 0
+		fi
+
+		if ! dpkg --print-foreign-architectures | grep -q "i386"; then
+		    echo "Adding i386 architecture..."
+		    sudo dpkg --add-architecture i386
+		    sudo apt-get update >/dev/null 2>&1
+		fi
+
+		if sudo apt-get install -y "$target_pkg" >/dev/null 2>&1; then
+		    echo -e "$target_pkg installed successfully"
+		else
+		    echo -e "$target_pkg failed to install"
+		fi
+
+        fi
+	    }
+
+    removearchpkg(){
+        if archcheck; then
+        installed_pkgs=$(pacman -Qq | grep -E '^slssteam(-git)?$' || true)
+        if [ -n "$installed_pkgs" ]; then
+            echo "We need to convert your Arch SLSsteam installation to a local one."
+            echo "Uninstalling Arch packages: $installed_pkgs"
+            sudo pacman -Rns --noconfirm $installed_pkgs
+        fi
+        fi
+    }
     
     DownloadClientManifest(){
         if steamoscheck; then
@@ -157,15 +224,16 @@ set -eu
         
     clientinstall(){
         echo "the headcrab latches on the steam process.."
+		createsteamcfg
         if steamoscheck; then
             echo "Steamos Detected"
             echo "Headcrab Bootstrapping SLSsteam.."
-            createsteamcfg
-           export_sls wheresteam -clearbeta steam://exit &> /dev/null
-        else
+           export_sls wheresteam -exitsteam 
+        elif flatpakcheck; then
             echo "Headcrab Bootstrapping SLSsteam.."
-            createsteamcfg
-            export_sls wheresteam -clearbeta steam://exit &> /dev/null
+            export_sls wheresteam -clearbeta steam://exit
+		else
+			export_sls wheresteam -clearbeta steam://exit
         fi
             echo "" &> /dev/null
             }
@@ -279,7 +347,7 @@ set -eu
 
     extractSLSsteam(){
         downloadSLSsteam
-         7z x $SCRIPT_DIR/SLSsteam-Any.7z -aoa
+         7z x $SCRIPT_DIR/SLSsteam-Any.7z -aoa > /dev/null
          rm -rf tools
          rm -rf res
          rm setup.sh
@@ -351,26 +419,15 @@ EOF
     }
 
     patchsteam(){
-        if [ -f "$RepoSLSsteamLocation/libSLSsteam.so" ]; then
-                patchreposteam
-        elif [ -d "$FlatpakSteamInstallDir" ]; then
+        if [ -d "$FlatpakSteamInstallDir" ]; then
                 patchflatpaksteam
         else
                 patchlocalsteam
         fi
         }
 
-    patchreposteam(){
-        cd $SteamInstallDir/
-        if grep -q -F "export LD_AUDIT=/usr/lib32/libSLS-library-inject.so:/usr/lib32/libSLSsteam.so" "steam.sh"; then
-            echo  "Steam Runner Script Already Patched ,Skipping..."
-        else
-            sed -i '10a export LD_AUDIT=/usr/lib32/libSLS-library-inject.so:/usr/lib32/libSLSsteam.so' steam.sh
-        fi
-            echo "SLSSteamInstallType: System"
-        }
         
-patchflatpaksteam(){
+    patchflatpaksteam(){
         cd $FlatpakSteamInstallDir/
         if grep -q -F "export LD_AUDIT=$HOME/.var/app/com.valvesoftware.Steam/.local/share/SLSsteam/library-inject.so:$HOME/.var/app/com.valvesoftware.Steam/.local/share/SLSsteam/SLSsteam.so" "steam.sh"; then
             echo  "Steam Runner Script Already Patched ,Skipping..."
@@ -382,12 +439,12 @@ patchflatpaksteam(){
 
     patchlocalsteam(){
         cd $SteamInstallDir/
-        if grep -q -F "export LD_AUDIT=$HOME/.local/share/SLSsteam/library-inject.so:$HOME/.local/share/SLSsteam/SLSsteam.so" "steam.sh"; then
-            echo "Steam Runner Script Already Patched ,Skipping..."
-        else
-            sed -i '10a export LD_AUDIT=$HOME/.local/share/SLSsteam/library-inject.so:$HOME/.local/share/SLSsteam/SLSsteam.so' steam.sh
-        fi
-            echo "SLSSteamInstallType: Local"
+        if [ -f "steam.sh" ]; then
+            mv steam.sh steam.sh.bak
+        	wget "$Steamos_Native_LaunchScript" &> /dev/null
+			chmod +x steam.sh
+		fi
+        	echo "SLSSteamInstallType: Local"
         }
 
         conditioncheck(){
@@ -399,6 +456,8 @@ patchflatpaksteam(){
             }
 
     main(){
+        preinstallchecks
+		SetupHeadcrab_Updater
         backupconfig
         checkforsteamcfg
         }
