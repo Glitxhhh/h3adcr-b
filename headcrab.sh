@@ -25,11 +25,6 @@ set -eu
     Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/sources.txt"
 	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/headcrab.desktop"
 	
-
-    archcheck(){
-        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "arch" || "$ID_LIKE" =~ "arch" ]] || [ -f /etc/arch-release ]
-        }
-
     archcheck(){
         [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "arch" || "$ID_LIKE" =~ "arch" ]] || [ -f /etc/arch-release ]
         }
