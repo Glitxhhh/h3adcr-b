@@ -4,7 +4,7 @@ set -eu
     #Headcrab Compatibile Client Version
     HeadcrabCompatibleClientVer=1769025840
     
-    #paths
+    #Paths
     SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 	ApplicationDirectory=$HOME/.local/share/applications
     SteamInstallDir=$HOME/.steam/steam
@@ -14,11 +14,11 @@ set -eu
     SLSsteamInstallDir=$HOME/.local/share/SLSsteam
     SLSsteamConfigDir=$HOME/.config/SLSsteam
     InstallDir=$SCRIPT_DIR/bin
-    RepoSLSsteamLocation=/usr/lib32
-    LinuxClientManifest="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/steam_client_ubuntu12"
-    DeckClientManifest="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/steam_client_steamdeck_stable_ubuntu12"
-    Headcrab_Downgrade_URL="http://localhost:1666/"
     Headcrab_Downgrader_Path=$HOME/.headcrab
+	#URL'S
+    Headcrab_Downgrade_URL="http://localhost:1666/"
+	LinuxClientManifest="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/steam_client_ubuntu12"
+    DeckClientManifest="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/steam_client_steamdeck_stable_ubuntu12"
 	Steamos_Native_LaunchScript="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/steam.sh"
     dgsc="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dgsc"
     dlm="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dlm"
@@ -418,24 +418,13 @@ EOF
     }
 
     patchsteam(){
-        if [ -f "$RepoSLSsteamLocation/libSLSsteam.so" ]; then
-                patchreposteam
-        elif [ -d "$FlatpakSteamInstallDir" ]; then
+        if [ -d "$FlatpakSteamInstallDir" ]; then
                 patchflatpaksteam
         else
                 patchlocalsteam
         fi
         }
 
-    patchreposteam(){
-        cd $SteamInstallDir/
-        if grep -q -F "export LD_AUDIT=/usr/lib32/libSLS-library-inject.so:/usr/lib32/libSLSsteam.so" "steam.sh"; then
-            echo  "Steam Runner Script Already Patched ,Skipping..."
-        else
-            sed -i '10a export LD_AUDIT=/usr/lib32/libSLS-library-inject.so:/usr/lib32/libSLSsteam.so' steam.sh
-        fi
-            echo "SLSSteamInstallType: System"
-        }
         
     patchflatpaksteam(){
         cd $FlatpakSteamInstallDir/
