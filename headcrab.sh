@@ -26,6 +26,14 @@ set -eu
 	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/headcrab.desktop"
 	
 
+    archcheck(){
+        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "arch" || "$ID_LIKE" =~ "arch" ]] || [ -f /etc/arch-release ]
+        }
+
+    archcheck(){
+        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "arch" || "$ID_LIKE" =~ "arch" ]] || [ -f /etc/arch-release ]
+        }
+
     debiancheck(){
         [ -f /etc/os-release ] && source /etc/os-release && [[ "${ID:-}" == "debian" || "${ID:-}" == "ubuntu" || "${ID_LIKE}" =~ "debian" || "${ID_LIKE}" =~ "ubuntu" ]]
         }   
@@ -109,6 +117,11 @@ set -eu
         fi
         }
 
+    preinstallchecks(){
+        installdebiandeps
+        removearchpkg
+        }
+
     installdebiandeps() {	    
 	    if debiancheck; then
 
@@ -138,6 +151,18 @@ set -eu
 
         fi
 	    }
+
+    removearchpkg(){
+        if archcheck; then
+        for pkg in slssteam slssteam-git; do
+            if pacman -Q "$pkg" &> /dev/null; then
+                echo "We need to convert your Arch SLSsteam installation to a local one."
+                echo "Uninstalling $pkg Arch package..."
+                sudo pacman -Rns "$pkg" --noconfirm
+            fi
+        done
+        fi
+    }
     
     DownloadClientManifest(){
         if steamoscheck; then
@@ -418,7 +443,7 @@ EOF
             echo "SLSSteamInstallType: System"
         }
         
-patchflatpaksteam(){
+    patchflatpaksteam(){
         cd $FlatpakSteamInstallDir/
         if grep -q -F "export LD_AUDIT=$HOME/.var/app/com.valvesoftware.Steam/.local/share/SLSsteam/library-inject.so:$HOME/.var/app/com.valvesoftware.Steam/.local/share/SLSsteam/SLSsteam.so" "steam.sh"; then
             echo  "Steam Runner Script Already Patched ,Skipping..."
@@ -447,7 +472,7 @@ patchflatpaksteam(){
             }
 
     main(){
-        installdebiandeps
+        preinstallchecks
 		SetupHeadcrab_Updater
         backupconfig
         checkforsteamcfg
