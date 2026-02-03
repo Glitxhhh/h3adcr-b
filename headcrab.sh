@@ -27,11 +27,11 @@ set -eu
 	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.desktop"
 	
     archcheck(){
-        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "arch" || "$ID_LIKE" =~ "arch" ]] || [ -f /etc/arch-release ]
+        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "arch" || "$ID"== "cachy" ]] || [ -f /etc/arch-release ]
         }
 
     debiancheck(){
-        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "debian" || "$ID" == "ubuntu" || "$ID_LIKE" =~ "debian" || "$ID_LIKE" =~ "ubuntu" ]]
+        [ -f /etc/os-release ] && source /etc/os-release && [[ "$ID" == "debian" || "$ID" == "ubuntu" ]]
         }   
 
     steamoscheck(){
