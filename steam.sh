@@ -5,6 +5,7 @@ set -o pipefail
 shopt -s failglob
 
 INJECT_SLS="LD_AUDIT=$HOME/.local/share/SLSsteam/library-inject.so:$HOME/.local/share/SLSsteam/SLSsteam.so"
+UPDATE_URL="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh"
 
 steam(){
 log () {
@@ -732,7 +733,7 @@ headcrab(){
 	for option in "$@"
 	do
 		if [ "$option" = "-headcrab" ]; then
-			curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
+			curl -fsSL "$UPDATE_URL" | bash
 			exit
 		fi
 	done
@@ -743,4 +744,3 @@ if headcrab "$@"; then
 fi
 echo "type -headcrab to update client"
 steam "$@"
-
