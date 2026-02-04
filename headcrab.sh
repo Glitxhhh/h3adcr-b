@@ -80,9 +80,11 @@ set -eu
         if [ -f "steam_client_steamdeck_stable_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_steamdeck_stable_ubuntu12.manifest | awk -F'"' '{print $4}')
             echo "SteamClientChannel: Stable"
-        else
+        elif [ -f "steam_client_steamdeck_publicbeta_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_steamdeck_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
             echo "SteamClientChannel: Beta"
+		else
+			echo "SteamClientChannel: Unknown"
         fi
             echo "SteamClientType: SteamOS"
         }
@@ -91,9 +93,11 @@ set -eu
         if [ -f "steam_client_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_ubuntu12.manifest | awk -F'"' '{print $4}')
             echo "SteamClientChannel: Stable"
-        else
+        elif [ -f "steam_client_publicbeta_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
             echo "SteamClientChannel: Beta"
+		else
+			echo "SteamClientChannel: Unknown"
         fi
             echo "SteamClientType: Flatpak"
         }
@@ -102,9 +106,11 @@ set -eu
         if [ -f "steam_client_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_ubuntu12.manifest | awk -F'"' '{print $4}')
             echo "SteamClientChannel: Stable"
-        else
+        elif [ -f "steam_client_publicbeta_ubuntu12.manifest" ]; then
             versionnumber=$(grep '"version"' steam_client_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
             echo "SteamClientChannel: Beta"
+		else
+			echo "SteamClientChannel: Unknown"
         fi
             echo "SteamClientType: Native"
         }
@@ -255,6 +261,8 @@ set -eu
         cd package/
         $Headcrab_Downgrader_Path/dlm --input-file sources.txt --max-concurrent 16
         echo "Headcrab_dlm Fetched Client Update"
+		rm sources.txt
+		rm headcrab.txt
         }
         
     dgsc(){
@@ -269,6 +277,7 @@ set -eu
         wheresteamcfg
         rm package/*
         cd package/
+		echo "headcrab" > headcrab.txt
         wget "$Sources" &> /dev/null
         DownloadClientManifest
         dlm
