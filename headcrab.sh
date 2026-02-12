@@ -20,10 +20,10 @@ set -eu
     Headcrab_Downgrade_URL="http://localhost:1666/"
 	LinuxClientManifest="https://raw.githubusercontent.com/Deadboy666/SteamTracking/refs/heads/headcrab/ClientManifest/steam_client_ubuntu12"
     DeckClientManifest="https://raw.githubusercontent.com/Deadboy666/SteamTracking/refs/heads/headcrab/ClientManifest/steam_client_steamdeck_stable_ubuntu12"
-	Steamos_Native_LaunchScript="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/steam.sh"
-    dgsc="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dgsc"
-    dlm="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dlm"
-    Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/sources.txt"
+	Steamos_Native_LaunchScript="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/steam.sh"
+    dgsc="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dgsc"
+    dlm="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dlm"
+    Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/sources.txt"
 	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.desktop"
 	
     read_os_release(){
