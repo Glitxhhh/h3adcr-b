@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 set -eu
 
@@ -21,12 +20,12 @@ set -eu
     Headcrab_Downgrade_URL="http://localhost:1666/"
 	LinuxClientManifest="https://raw.githubusercontent.com/Deadboy666/SteamTracking/refs/heads/headcrab-testing/ClientManifest/steam_client_ubuntu12"
     DeckClientManifest="https://raw.githubusercontent.com/Deadboy666/SteamTracking/refs/heads/headcrab-testing/ClientManifest/steam_client_steamdeck_stable_ubuntu12"
-	Headcrab_Native="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab_native.sh"
-	Headcrab_Flatpak="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab_flatpak.sh"
-    dgsc="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dgsc"
-    dlm="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dlm"
+	Headcrab_Native="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/testing/headcrab_native.sh"
+	Headcrab_Flatpak="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/testing/headcrab_flatpak.sh"
+    dgsc="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dgsc"
+    dlm="https://github.com/Deadboy666/h3adcr-b/raw/refs/heads/testing/dlm"
     Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/testing/sources.txt"
-	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.desktop"
+	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/testing/headcrab.desktop"
 	
     read_os_release(){
         local f
@@ -61,6 +60,11 @@ set -eu
         read_os_release
         [ "$OS_ID" = "steamos" ]
         }
+		
+	bazzitecheck(){
+        read_os_release
+        [ "$OS_ID" = "bazzite" ]
+        }
     
     flatpakcheck(){
         [ -d "$FlatpakSteamInstallDir" ]
@@ -87,6 +91,23 @@ set -eu
             echo "SteamClientChannel: Beta"
         fi
             echo "SteamClientType: SteamOS"
+        }
+		
+	BazziteClientCheck(){
+        if [ -f "steam_client_steamdeck_stable_ubuntu12.manifest" ]; then
+            versionnumber=$(grep '"version"' steam_client_steamdeck_stable_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Stable (Bazzite-Deck)"
+        elif [ -f steam_client_steamdeck_publicbeta_ubuntu12.manifest ]; then
+            versionnumber=$(grep '"version"' steam_client_steamdeck_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Beta (Bazzite-Deck)"
+		elif [ -f "steam_client_ubuntu12.manifest" ]; then
+            versionnumber=$(grep '"version"' steam_client_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Stable (Bazzite-Desktop)"
+		else
+            versionnumber=$(grep '"version"' steam_client_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
+            echo "SteamClientChannel: Beta (Bazzite-Desktop)"
+        fi
+            echo "SteamClientType: Bazzite"
         }
 
     FlatpakClientCheck(){
@@ -117,6 +138,8 @@ set -eu
         cd package/
         if steamoscheck; then
             SteamOSClientCheck
+		elif bazzitecheck; then
+            BazziteClientCheck
         elif flatpakcheck; then
             FlatpakClientCheck
         else
@@ -212,16 +235,31 @@ set -eu
             echo "Not present: $local_target"
         fi
     }
-    
+	
+    TrashiteWatMani(){
+		wheresteamcfg
+		cd package/
+		if [ -f "steam_client_steamdeck_stable_ubuntu12.installed"
+			echo "Headcrab Downloading Bazzite-Deck Client Manifest"
+			wget "$DeckClientManifest" &> /dev/null
+		else
+			echo "Headcrab Downloading Bazzite-Desktop Client Manifest"
+			wget "$LinuxClientManifest" &> /dev/null
+		fi
+			echo "" &> /dev/null
+		}
+		
     DownloadClientManifest(){
-        if steamoscheck; then
-        echo "Headcrab Downloading Steamos Client Manifest.."
-        wget "$DeckClientManifest" &> /dev/null
-    else
-        echo "Headcrab Downloading Linux Client Manifest.."
-        wget "$LinuxClientManifest" &> /dev/null
-    fi
-        echo "Client Manifest Downloaded"
+	    if steamoscheck; then
+	        echo "Headcrab Downloading Steamos Client Manifest.."
+	        wget "$DeckClientManifest" &> /dev/null
+		elif bazzitecheck; then
+			TrashitewatMani
+	    else
+	        echo "Headcrab Downloading Linux Client Manifest.."
+	        wget "$LinuxClientManifest" &> /dev/null
+	    fi
+	        echo "Client Manifest Downloaded"
     }
     
     download_dgsc(){
@@ -282,7 +320,11 @@ set -eu
         if steamoscheck; then
             echo "Steamos Detected"
             echo "Headcrab Bootstrapping SLSsteam.."
-           export_sls wheresteam -exitsteam 
+           export_sls wheresteam -exitsteam
+		elif bazzitecheck; then
+			echo "Bazzite Detected"
+            echo "Headcrab Bootstrapping SLSsteam.."
+           export_sls wheresteam -exitsteam
         elif flatpakcheck; then
             echo "Headcrab Bootstrapping SLSsteam.."
             export_sls wheresteam -clearbeta steam://exit
@@ -348,6 +390,12 @@ set -eu
         echo "the headcrab latches on the steam process.."
         if steamoscheck; then
             echo "Steamos Detected"
+            createsteamcfg
+            dgsc
+            echo "Headcrab Connecting to The Updater.."
+           export_sls wheresteam -textmode -forcesteamupdate -forcepackagedownload -overridepackageurl "$Headcrab_Downgrade_URL" -exitsteam &> /dev/null
+		elif bazzitecheck; then
+			echo "Bazzite Detected"
             createsteamcfg
             dgsc
             echo "Headcrab Connecting to The Updater.."
