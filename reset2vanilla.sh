@@ -33,12 +33,12 @@ TRASHITE_DIR=/usr/local/bin
     if [ -f "steam.save" ]; then
       echo "Purging The Deprecated Methods"
       sudo rm {steam.save,steam}
-    elif [ -f "steam" ]; then
-      echo "Purging The Deprecated Methods"
-      sudo rm steam
    elif [ -f "bazzite-steam" ]; then
       echo "Purging The Deprecated Methods"
-      sudo rm bazzite-steam
+      sudo rm {bazzite-steam,steam}
+  elif [ -f "steam" ]; then
+      echo "Purging The Deprecated Methods"
+      sudo rm steam
     else
       echo "Bazzite Install Unmodified"
     fi
