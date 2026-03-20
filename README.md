@@ -30,3 +30,5 @@ Close Steam, then run:
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
 ```
+## Troubleshooting
+[View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki)   
