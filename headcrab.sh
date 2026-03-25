@@ -71,12 +71,13 @@ set -eu
         }
 		
 	SetupHeadcrab_Updater(){
+		mkdir -p $ApplicationDirectory
 		cd $ApplicationDirectory/
 		if [ -f headcrab.desktop ]; then
 			rm headcrab.desktop
 		fi
 			wget "$Headcrab_Updater" &> /dev/null
-			chmod +x headcrab.desktop
+		    chmod +x headcrab.desktop
 			update-desktop-database $ApplicationDirectory
 			echo "Headcrab Updater Now In Your Applications Menu"
 			echo "Can Open Up Headcrab Updater To Update To Latest Version."
