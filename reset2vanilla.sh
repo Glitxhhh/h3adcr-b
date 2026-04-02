@@ -97,18 +97,10 @@ TRASHITE_DIR=/usr/local/bin
         echo "" &> /dev/null
         }
 
-   PurgeSLSsteam(){
-        if [ -d "$FlatpakSLSsteamConfigDir" ]; then
-               rm -rf "$FlatpakSLSsteamInstallDir"
-        else
-              rm -rf "$SLSsteamInstallDir"
-            fi
-            }
             
   PurgeHeadcrab(){
     echo "Bashing The Headcrab With A Cr0wbar.."
     resetlaunch
-    PurgeSLSsteam
     echo "Headcrab Despawned Out Of The Enviroment Reloading Save.."
     wheresteam -exitsteam
     fixtrashite
