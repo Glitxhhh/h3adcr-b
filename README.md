@@ -36,4 +36,5 @@ curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/mai
 ## Types Of Installs Headcrab Will Not Support
 
 **Void Linux**
+
 **Snap Steam Installs** "Install The Native Binary Or Use The Flatpak"
