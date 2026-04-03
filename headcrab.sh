@@ -60,6 +60,11 @@ set -eu
         read_os_release
         [ "$OS_ID" = "steamos" ]
         }
+		
+	voidcheck(){
+        read_os_release
+        [ "$OS_ID" = "void" ]
+        }
 	
 	cachyoscheck(){
         read_os_release
