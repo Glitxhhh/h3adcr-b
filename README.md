@@ -37,4 +37,4 @@ curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/mai
 
 **Void Linux** [Use The Regular Installer](https://github.com/AceSLS/SLSsteam/wiki/Installation)
 
-**Snap Steam Installs** "Install The Native Binary Or Use The Flatpak"
+**Snap Steam Installs** "Install The [Native Binary](https://cdn.akamai.steamstatic.com/client/installer/steam.deb) Or Use The [Flatpak](https://flathub.org/en/apps/com.valvesoftware.Steam)"
