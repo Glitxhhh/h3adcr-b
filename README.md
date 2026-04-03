@@ -31,4 +31,9 @@ Close Steam, then run:
 curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
 ```
 ## Troubleshooting
-[View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki)   
+[View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki)
+
+## Types Of Installs Headcrab Will Not Support
+
+**Void Linux**
+**Snap Steam Installs** "Install The Native Binary Or Use The Flatpak"
