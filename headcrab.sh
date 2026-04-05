@@ -508,7 +508,7 @@ set -eu
                 copySLSsteam
                 LD_AUDIT=$HOME/.local/share/SLSsteam/library-inject.so:$HOME/.local/share/SLSsteam/SLSsteam.so "$@"
         fi
-                echo "" &> /dev/null
+                echo &> /dev/null
                 }
 
     extractSLSsteam(){
@@ -535,28 +535,8 @@ set -eu
         else
             copySLSsteam
         fi
-            backupconfig
+            echo &. /dev/null
         }
-
-    plsdontbreakthingsthatwork(){
-        whereSLSsteamconfig
-        if [ -f "config.bak" ]; then
-            mv config.bak config.yaml
-    else
-            echo "" &> /dev/null
-        fi
-            echo "" &> /dev/null
-            }
-            
-    backupconfig(){
-        plsdontbreakthingsthatwork
-        if [ -f "config.yaml" ]; then
-            mv config.yaml config.yaml.bak
-    else
-            echo "" &> /dev/null
-        fi
-            echo "" &> /dev/null
-            }
 
     editconfig(){
         whereSLSsteamconfig
@@ -627,7 +607,6 @@ EOF
     main(){
         preinstallchecks
 		SetupHeadcrab_Updater
-        backupconfig
         checkforsteamcfg
         }
 
