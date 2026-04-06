@@ -40,4 +40,5 @@ xbps-install {wget,curl,grep,awk,sed,7zip}
 ```
 ## Types Of Installs Headcrab Will Not Support
 **Snap Steam Installs** "Install The [Native Binary](https://cdn.akamai.steamstatic.com/client/installer/steam.deb) Or Use The [Flatpak](https://flathub.org/en/apps/com.valvesoftware.Steam)"
+
 **Any Thing That SLS DOES NOT SUPPORT**
