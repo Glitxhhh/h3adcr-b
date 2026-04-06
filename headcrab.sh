@@ -98,8 +98,7 @@ set -eu
             versionnumber=$(grep '"version"' steam_client_steamdeck_stable_ubuntu12.manifest | awk -F'"' '{print $4}')
             echo "SteamClientChannel: Stable"
         else
-            versionnumber=$(grep '"version"' steam_client_steamdeck_publicbeta_ubuntu12.manifest | awk -F'"' '{print $4}')
-            echo "SteamClientChannel: Beta"
+            echo "SteamClientChannel: Not Supported"
         fi
             echo "SteamClientType: SteamOS"
         }
