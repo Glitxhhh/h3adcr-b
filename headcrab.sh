@@ -496,7 +496,7 @@ set -eu
     downloadSLSsteam(){
         echo "Downloading Latest SLSsteam.."
         cd $SCRIPT_DIR/
-		mkdir -p SLSsteam_Download
+		mkdir -p $SCRIPT_DIR/SLSsteam_Download
 		cd SLSsteam_Download
         wget -O SLSsteam-Any.7z \
     $(curl -s "https://api.github.com/repos/AceSLS/SLSsteam/releases/latest" \
