@@ -43,7 +43,8 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 xbps-install {wget,curl,grep,awk,sed,7zip}
 ```
 Void Support Being Worked On
-      * Artix Try Running Headcrab.
+     
+   * Artix Try Running Headcrab.
         
 
 
