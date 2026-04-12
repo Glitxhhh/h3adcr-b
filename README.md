@@ -15,6 +15,24 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 - Installs the latest SLSsteam release.
 - Overides Steam client updates to maintain compatibility with SLSsteam updates.
 - Works with Native, Flatpak, and SteamOS,Bazzite installations.
+  **Native** Targets The Ubuntu12 Client
+  **Distro's Headcrab Supports**
+   * Fedora Based Distros
+      - Nobara
+      - Fedora
+  
+   * Arch/SteamOS Like Distros
+     - Bazzite
+     - CachyOS
+     - Steamos
+     - Chimera
+     - Arch Based Distros (ex. Manjaro, Endevour, Artix?)
+       
+   * Ubuntu/Debian Based Distros.
+     **W.I.P Support**
+      * Void Linux
+      * Artix?
+        
 - Rootless operation.
 
 ## Requirements
