@@ -17,6 +17,7 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 - Works with Native, Flatpak, and SteamOS,Bazzite installations.
 - Rootless operation* *As Long as The Dependacies Are Met.*
  ## Supported Client Installs.
+  
   - Native Installs (The Native Package That You Install On Your Distro)
   - Flatpak Installs (Its Native In A Limited Container)
     
@@ -24,14 +25,12 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
    * Fedora Based Distros
       - Nobara
       - Fedora
-  
    * Arch/SteamOS Like Distros
      - Bazzite
      - CachyOS
      - Steamos
      - Chimera
-     - Arch Based Distros (ex. Manjaro, Endevour, Artix?)
-       
+     - Arch Based Distros (ex. Manjaro, Endevour, Artix?) 
    * Ubuntu/Debian Based Distros.
      **W.I.P Support**
       * Void Linux
