@@ -49,6 +49,10 @@ xbps-install {wget,curl,grep,awk,sed,7zip}
 Void Support Being Worked On
      
    * Artix Try Running Headcrab.
+## Types Of Installs Headcrab Will Not Support
+**Snap Steam Installs** "Install The [Native Binary](https://cdn.akamai.steamstatic.com/client/installer/steam.deb) Or Use The [Flatpak](https://flathub.org/en/apps/com.valvesoftware.Steam)"
+
+**Any Thing That SLS DOES NOT SUPPORT**
         
 
 ## Usage
@@ -61,7 +65,4 @@ curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/mai
 ## Troubleshooting
 [View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki)
 
-## Types Of Installs Headcrab Will Not Support
-**Snap Steam Installs** "Install The [Native Binary](https://cdn.akamai.steamstatic.com/client/installer/steam.deb) Or Use The [Flatpak](https://flathub.org/en/apps/com.valvesoftware.Steam)"
 
-**Any Thing That SLS DOES NOT SUPPORT**
