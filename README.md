@@ -1,12 +1,11 @@
 # h3adcr-b
 
 Headcrab is a rootless Steam client compatibility helper that compares the installed client version, with a known compatible build, installs SLSsteam and control updates.
-
 * Install
-- **Requirements**: `wget`, `curl`, `grep`, `awk`, `sed`, `7zip`
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
 ```
+- **Requirements**: `wget`, `curl`, `grep`, `awk`, `sed`, `7zip`
 ## Features
 - Installs the latest SLSsteam release.
 - Overides Steam client updates to maintain compatibility with SLSsteam updates.
