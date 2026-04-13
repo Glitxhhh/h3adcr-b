@@ -14,15 +14,14 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
 ```
-
+## Requirements
+- `wget`, `curl`, `grep`, `awk`, `sed`, `7zip` available in PATH.
 ## Features
-
 - Installs the latest SLSsteam release.
 - Overides Steam client updates to maintain compatibility with SLSsteam updates.
 - Rootless operation* *As Long as The Dependacies Are Met.*
 
-## Requirements
-- `wget`, `curl`, `grep`, `awk`, `sed`, `7zip` available in PATH.
+
 
 ## Supported Client Installs:
   - Native Installs (The Native Package That You Install On Your Distro)
