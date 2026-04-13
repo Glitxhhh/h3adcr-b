@@ -7,10 +7,11 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 - Rootless operation* *As Long as The Dependacies Are Met.*
 
 ## Install
+- **Requirements**: `wget`, `curl`, `grep`, `awk`, `sed`, `7zip`
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
 ```
-- **Requirements**: `wget`, `curl`, `grep`, `awk`, `sed`, `7zip`
+
 
 
 ## How it works
