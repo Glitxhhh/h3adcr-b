@@ -17,7 +17,6 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 - Rootless operation* *As Long as The Dependacies Are Met.*
 
 ## Requirements
-- [Supported Steam Install](https://github.com/Deadboy666/h3adcr-b/tree/main?tab=readme-ov-file#distros-supported-by-h3adcr-b)
 - `wget`, `curl`, `grep`, `awk`, `sed`, `7zip` available in PATH.
 
    ## Supported Client Installs:
