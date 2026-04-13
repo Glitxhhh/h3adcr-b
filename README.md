@@ -36,7 +36,6 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 xbps-install {wget,curl,grep,awk,sed,7zip}
 ```
  ## Getting Started.
-  * Install
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
 ```
