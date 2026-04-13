@@ -18,6 +18,7 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 
 ## Requirements
 - `wget`, `curl`, `grep`, `awk`, `sed`, `7zip` available in PATH.
+- For Troubleshooting h3adcr-b [View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki)
 
    ## Supported Client Installs:
   - Native Installs (The Native Package That You Install On Your Distro)
@@ -51,7 +52,6 @@ Close Steam, then run:
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
 ```
-## Troubleshooting
-[View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki)
+
 
 
