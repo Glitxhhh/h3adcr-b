@@ -46,12 +46,6 @@ xbps-install {wget,curl,grep,awk,sed,7zip}
 Void Support Being Worked On
      
    * Artix Try Running Headcrab.
-## Types Of Installs Headcrab Will Not Support
-
-
-**Any Thing That SLS DOES NOT SUPPORT**
-        
-
 ## Usage
 
 Close Steam, then run:
