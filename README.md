@@ -27,14 +27,10 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
      - Arch Based Distros (ex. `Manjaro`, `CachyOS`, `Endevour`, `ArchBTW`)
        
    * Ubuntu/Debian Based Distros.
+   * Void Linux Based Distros
      
    * **W.I.P Support**
       * Artix?
-      * Void Linux*
-        *Void Support Being Worked On*
- ```
-xbps-install {wget,curl,grep,awk,sed,7zip}
-```
  ## Getting Started.
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.sh" | bash
