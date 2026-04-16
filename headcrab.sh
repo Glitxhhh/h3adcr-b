@@ -608,30 +608,27 @@ set -eu
         else
             copySLSsteam
         fi
-            echo &. /dev/null
+            echo &> /dev/null
         }
+
 
     editconfig(){
         whereSLSsteamconfig
-            if grep -q -F "PlayNotOwnedGames: " "config.yaml"; then
+            if [ -f .headcrabd ]; then
+                echo "Headcrab Config Found Skipping Changes"
+            else
                 sed -i "s/^PlayNotOwnedGames:.*/PlayNotOwnedGames: yes/" config.yaml
                 sed -i "s/^SafeMode:.*/SafeMode: yes/" config.yaml
 				sed -i "s/^NotifyInit:.*/NotifyInit: yes/" config.yaml
 				sed -i "s/^Notifications:.*/Notifications: yes/" config.yaml
-                echo "PlayNotOwnedGames: Enabled"
-                echo "SafeMode: Enabled"
-				echo "Notifications: Enabled"
-            else
-                echo "PlayNotOwnedGames: Enabled"
-                echo "SafeMode: Enabled"
-				echo "Notifications: Disabled"
+				echo "config patched" > .headcrabd
                 fi
             }
 
     createsteamcfg(){
     wheresteamcfg
     if [ -f "steam.cfg" ]; then
-        rm steam.cfg
+        echo "steam.cfg Found Skipping Creation Process.."
     else
         cat << 'EOF' > steam.cfg
 BootStrapperInhibitAll=enable
