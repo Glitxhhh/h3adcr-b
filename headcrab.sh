@@ -448,15 +448,15 @@ set -eu
         if steamoscheck; then
             echo "Steamos Detected"
             echo "Headcrab Bootstrapping SLSsteam.."
-           export_sls wheresteam -exitsteam
+           export_sls wheresteam -exitsteam &> /dev/null
 		elif bazzitecheck; then
 			echo "Bazzite Detected"
             echo "Headcrab Bootstrapping SLSsteam.."
-           export_sls wheresteam -exitsteam
+           export_sls wheresteam -exitsteam &> /dev/null
 		elif cachyoscheck; then
 			echo "CachyOS Detected"
             echo "Headcrab Bootstrapping SLSsteam.."
-           export_sls wheresteam -exitsteam
+           export_sls wheresteam -exitsteam &> /dev/null
         elif flatpakcheck; then
             echo "Headcrab Bootstrapping SLSsteam.."  
 			export_sls wheresteam -clearbeta steam://exit
