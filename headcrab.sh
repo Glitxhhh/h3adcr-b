@@ -567,7 +567,7 @@ set -eu
 		mkdir -p $SCRIPT_DIR/SLSsteam_Download
 		cd SLSsteam_Download
         wget -O SLSsteam-Any.7z \
-    $(curl -s "https://api.github.com/repos/AceSLS/SLSsteam/releases/latest" \
+    $(curl -s "https://api.github.com/repos/AceSLS/SLSsteam/releases/tags/20260426100015" \
     | grep "browser_download_url" \
     | grep "SLSsteam-Any.7z" \
     | cut -d '"' -f 4) &> /dev/null
