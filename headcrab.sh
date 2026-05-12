@@ -500,6 +500,7 @@ set -eu
                 cp -f $InstallDir/library-inject.so $FlatpakSLSsteamInstallDir/
                 cp -f $InstallDir/SLSsteam.so $FlatpakSLSsteamInstallDir/
 				cp -f $InstallDir/cloud_redirect.so $FlatpakCloudRedirectDir/
+				flatpak install --user $InstallDir/cloudredirect.flatpak
         else
                  mkdir -p $SLSsteamInstallDir
                  mkdir -p $SLSsteamConfigDir
@@ -507,9 +508,8 @@ set -eu
                  cp -f $InstallDir/library-inject.so $SLSsteamInstallDir/
                  cp -f $InstallDir/SLSsteam.so $SLSsteamInstallDir/
 				 cp -f $InstallDir/cloud_redirect.so $CloudRedirectDir/
+				 flatpak install --user $InstallDir/cloudredirect.flatpak
             fi
-				flatpak install --user cloudredirect.flatpak
-				rm cloudredirect.flatpak
                 echo "" &> /dev/null
             }
             
@@ -598,8 +598,8 @@ set -eu
     extractSLSsteam(){
         downloadSLSsteam
          7z x $SCRIPT_DIR/SLSsteam_Download/SLSsteam-Any.7z -aoa > /dev/null
-		 wget "$CR_Flatpak" &> /dev/null
-		 wget "$CR_Lib" &> /dev/null
+		 wget "$CR_Flatpak"
+		 wget "$CR_Lib"
          rm -rf tools
          rm -rf res
          rm setup.sh
