@@ -22,8 +22,8 @@ set -eu
     Headcrab_Downgrade_URL="http://localhost:1666/"
 	LinuxClientManifest="https://raw.githubusercontent.com/Deadboy666/SteamTracking/refs/heads/headcrab-testing/ClientManifest/steam_client_ubuntu12"
     DeckClientManifest="https://raw.githubusercontent.com/Deadboy666/SteamTracking/refs/heads/headcrab-testing/ClientManifest/steam_client_steamdeck_stable_ubuntu12"
-	Headcrab_Native="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab_native.sh"
-	Headcrab_Flatpak="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab_flatpak.sh"
+	Headcrab_Native="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/cr-test/headcrab_native.sh"
+	Headcrab_Flatpak="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/cr-test/headcrab_flatpak.sh"
 	Headcrab_Client="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/cr-test/client.sh"
 	CloudRedirectApp="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/cr-test/cloudredirect.flatpak"
 	CloudRedirectLib="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/cr-test/cloud_redirect.so"
@@ -496,15 +496,22 @@ set -eu
     wheresteamdir(){
         if [ -d "$FlatpakSteamInstallDir" ]; then
                 mkdir -p $FlatpakSLSsteamInstallDir
+				mkdir -p $FlatpakCloudRedirectDir
                 cp -f $InstallDir/library-inject.so $FlatpakSLSsteamInstallDir/
-                cp -f $InstallDir/SLSsteam.so $FlatpakSLSsteamInstallDir/ 
+                cp -f $InstallDir/SLSsteam.so $FlatpakSLSsteamInstallDir/
+				cp -f $InstallDir/cloud_redirect.so $FlatpakCloudRedirectDir/
         else
-                 mkdir -p $SLSsteamInstallDir
+                 mkdir -p $CloudRedirectDir
+				 mkdir -p $SLSsteamInstallDir
                  mkdir -p $SLSsteamConfigDir
                  cp -f $InstallDir/library-inject.so $SLSsteamInstallDir/
                  cp -f $InstallDir/SLSsteam.so $SLSsteamInstallDir/
+				 cp -f $InstallDir/cloud_redirect.so $CloudRedirectDir/
             fi
-                echo "" &> /dev/null
+                echo "Installing Cloud Redirect App"
+				flatpak install --user $InstallDir/cloudredirect.flatpak
+				echo "Cloud Redirect App Is Installed."
+				echo "" &> /dev/null
             }
             
     wheresteamcfg(){
@@ -597,7 +604,11 @@ set -eu
          rm setup.sh
          rm -rf docs
          rm SLSsteam-Any.7z
-         echo "SLSsteam Downloaded: Latest"
+		 echo "SLSsteam Downloaded: Latest"
+		 cd $InstallDir/
+		 echo "Downloading CloudRedirect"
+		 wget "$CloudRedirectLib"
+		 wget "$CloudRedirectApp"
          }
 
     copySLSsteam(){
