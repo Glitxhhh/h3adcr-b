@@ -32,7 +32,7 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
 ```bash
 curl -fsSL headcrab.pages.dev | bash
 ```
-- For Troubleshooting h3adcr-b* [View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki)
+- For Troubleshooting h3adcr-b* [View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki/Headcrab-Wiki)
 
 
 
