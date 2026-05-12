@@ -607,8 +607,8 @@ set -eu
 		 echo "SLSsteam Downloaded: Latest"
 		 cd $InstallDir/
 		 echo "Downloading CloudRedirect"
-		 wget "$CloudRedirectLib"
-		 wget "$CloudRedirectApp"
+		 wget -O cloud_redirect.so "$CloudRedirectLib"
+		 wget -O cloudredirect.flatpak "$CloudRedirectApp"
          }
 
     copySLSsteam(){
