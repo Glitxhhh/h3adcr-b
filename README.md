@@ -28,10 +28,17 @@ Headcrab is a rootless Steam client compatibility helper that compares the insta
        
    * Ubuntu/Debian Based Distros.
    * Void Linux Based Distros.
- ## Getting Started.
+ ## Getting Started
+ * Installing Headcrab
+ 
 ```bash
 curl -fsSL headcrab.pages.dev | bash
 ```
+* Installing The CloudRedirect App (Needs Flatpak with Flathub User Repo)
+```bash
+curl -fsSL headcrab.pages.dev/cloudredirect | bash
+```
+
 - For Troubleshooting h3adcr-b* [View the Wiki](https://github.com/Deadboy666/h3adcr-b/wiki/Headcrab-Wiki)
 
 
