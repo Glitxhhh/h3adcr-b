@@ -7,7 +7,7 @@ set -eu
 
     install_CR(){
     cd $SCRIPT_DIR/
-    wget -O cloudredirect.flatpak "$CloudRedirectApp"
+    wget -O cloudredirect.flatpak "$CloudRedirectApp" &> /dev/null
     echo "Installing Cloud Redirect App"
     flatpak install --user cloudredirect.flatpak --assumeyes --noninteractive
     echo "App Installed Open It To Configure Your Storage Provider"
