@@ -676,7 +676,7 @@ EOF
             rm steam.sh
 			wget -O client.sh "$Headcrab_Client" &> /dev/null
         	wget -O steam.sh "$Headcrab_Native" &> /dev/null
-			chmod +x steam.sh
+			chmod 555 steam.sh
 			chmod +x client.sh
 		fi
         	echo "SLSSteamInstallType: Local"
