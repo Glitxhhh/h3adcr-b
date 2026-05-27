@@ -500,14 +500,12 @@ set -eu
 				mkdir -p $FlatpakCloudRedirectDir
                 cp -f $InstallDir/library-inject.so $FlatpakSLSsteamInstallDir/
                 cp -f $InstallDir/SLSsteam.so $FlatpakSLSsteamInstallDir/
-				#cp -f $InstallDir/cloud_redirect.so $FlatpakCloudRedirectDir/
         else
                  mkdir -p $CloudRedirectDir
 				 mkdir -p $SLSsteamInstallDir
                  mkdir -p $SLSsteamConfigDir
                  cp -f $InstallDir/library-inject.so $SLSsteamInstallDir/
                  cp -f $InstallDir/SLSsteam.so $SLSsteamInstallDir/
-				 #cp -f $InstallDir/cloud_redirect.so $CloudRedirectDir/
             fi
 				echo "" &> /dev/null
             }
@@ -605,8 +603,6 @@ set -eu
          rm SLSsteam-Any.7z
 		 echo "SLSsteam Downloaded: Latest"
 		 cd $InstallDir/
-		 #echo "Downloading CloudRedirect"
-		 #wget -O cloud_redirect.so "$CloudRedirectLib"
          }
 
     copySLSsteam(){
@@ -622,7 +618,7 @@ set -eu
         else
             copySLSsteam
         fi
-            echo &. /dev/null
+            echo &> /dev/null
         }
 
     editconfig(){
@@ -666,7 +662,7 @@ EOF
             rm steam.sh
 			wget -O client.sh "$Headcrab_Client" &> /dev/null
         	wget -O steam.sh "$Headcrab_Flatpak" &> /dev/null
-			chmod +x steam.sh
+			chmod 555 steam.sh
 			chmod +x client.sh
 		fi
             echo "SLSSteamInstallType: Flatpak"
