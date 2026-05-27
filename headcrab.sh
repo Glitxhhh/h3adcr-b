@@ -7,6 +7,7 @@ set -eu
     #Paths
     SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 	ApplicationDirectory=$HOME/.local/share/applications
+	IconDirectory=$HOME/.local/share/icons/hicolor/48x48/apps/
     SteamInstallDir=$HOME/.steam/steam
     FlatpakCloudRedirectDir=$HOME/.var/app/com.valvesoftware.Steam/.local/share/CloudRedirect
 	FlatpakSteamInstallDir=$HOME/.var/app/com.valvesoftware.Steam/.steam/steam
@@ -30,6 +31,7 @@ set -eu
     dlm="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dlm"
     Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/testing/sources.txt"
 	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab.desktop"
+	Headcrab_Icon="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab.png"
 	
     read_os_release(){
         local f
@@ -86,11 +88,11 @@ set -eu
 		
 	SetupHeadcrab_Updater(){
 		mkdir -p $ApplicationDirectory
+		mkdir -p $IconDirectory
+		cd $IconDirectory/
+		wget -O headcrab.png "$Headcrab_Icon" &> /dev/null
 		cd $ApplicationDirectory/
-		if [ -f headcrab.desktop ]; then
-			rm headcrab.desktop
-		fi
-			wget "$Headcrab_Updater" &> /dev/null
+			wget -O headcrab.desktop "$Headcrab_Updater" &> /dev/null
 		    chmod +x headcrab.desktop
 			update-desktop-database $ApplicationDirectory
 			echo "Headcrab Updater Now In Your Applications Menu"
