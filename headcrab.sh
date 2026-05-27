@@ -29,7 +29,7 @@ set -eu
     dgsc="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dgsc"
     dlm="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dlm"
     Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/testing/sources.txt"
-	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b/refs/heads/main/headcrab.desktop"
+	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab.desktop"
 	
     read_os_release(){
         local f
