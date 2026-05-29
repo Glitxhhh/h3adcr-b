@@ -3,7 +3,7 @@ set -eu
     
     #Paths
     SCRIPT_DIR="$(dirname "$(realpath "$0")")"
-    CloudRedirectApp="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/cr-test/cloudredirect.flatpak"
+    CloudRedirectApp="https://github.com/Selectively11/h3adcr-b/releases/download/linux-test/cloudredirect.flatpak"
 
     install_CR(){
     cd $SCRIPT_DIR/
