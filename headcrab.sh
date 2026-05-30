@@ -321,15 +321,15 @@ set -eu
 	
 	InstallArchDeps(){
 	if archcheck; then
-	local headcrab_pkgs="curl 7zip awk grep sed"
-    if pacman -Q "$headcrab_pkgs" &>/dev/null; then
-        echo "Dependacies are already installed."
-        return 0
-    else
-        echo "$headcrab_pkgs is NOT installed."
-        sudo pacman -S "$headcrab_pkgs"
-		return 1
-    fi
+	 local packages=("wget" "curl" "grep" "awk" "sed" "7zip")
+    for pkg in "${packages[@]}"; do
+        if pacman -Qs "$pkg" > /dev/null 2>&1; then
+            echo "$pkg is installed."
+        else
+            echo " $pkg is NOT installed."
+			sudo pacman -S "$pkg"
+        fi
+    done
 	fi
 }
 
