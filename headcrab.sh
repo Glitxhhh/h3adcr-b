@@ -263,7 +263,7 @@ set -eu
             local missing_pkgs=()
             local missing_cmds=()
 
-            for pkg in wget curl grep gawk sed 7zip; do
+            for pkg in wget curl grep gawk sed 7zip psmisc; do
                 case "$pkg" in
                     gawk) cmd="awk" ;;
                     7zip) cmd="7z" ;;
@@ -297,7 +297,7 @@ set -eu
                 return 1
             fi
 
-            for pkg in wget curl grep gawk sed 7zip; do
+            for pkg in wget curl grep gawk sed 7zip psmisc; do
                 case "$pkg" in
                     gawk) cmd="awk" ;;
                     7zip) cmd="7z" ;;
