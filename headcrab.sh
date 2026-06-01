@@ -598,13 +598,20 @@ set -eu
         cd $SCRIPT_DIR/
         mkdir -p $SCRIPT_DIR/SLSsteam_Download
         cd SLSsteam_Download
-        local TAG
-        TAG=$(curl -sSL --connect-timeout 15 --max-time 30 \
-            -o /dev/null -w "%{url_effective}" \
-            "https://github.com/AceSLS/SLSsteam/releases/latest" 2>/dev/null)
-        TAG="${TAG##*/}"
-        wget -O SLSsteam-Any.7z \
-            "https://github.com/AceSLS/SLSsteam/releases/download/$TAG/SLSsteam-Any.7z" &> /dev/null
+		if [ -f "SLSsteam-Any.7z" ]; then
+			echo "Found Previous 7zip From a Failed Installation"
+			rm SLSsteam-Any.7z
+		else
+			echo "" &> /dev/null
+		fi
+			echo "Fetching Latest SLSsteam Release"
+	        local TAG
+	        TAG=$(curl -sSL --connect-timeout 15 --max-time 30 \
+	            -o /dev/null -w "%{url_effective}" \
+	            "https://github.com/AceSLS/SLSsteam/releases/latest" 2>/dev/null)
+	        TAG="${TAG##*/}"
+	        wget -O SLSsteam-Any.7z \
+	            "https://github.com/AceSLS/SLSsteam/releases/download/$TAG/SLSsteam-Any.7z" &> /dev/null
     }
     
     export_sls(){
