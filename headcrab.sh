@@ -272,7 +272,7 @@
             local missing_pkgs=()
             local missing_cmds=()
 
-            for pkg in wget curl grep gawk sed 7zip; do
+            for pkg in wget curl grep gawk sed 7zip flatpak; do
                 case "$pkg" in
                     gawk) cmd="awk" ;;
                     7zip) cmd="7z" ;;
@@ -306,7 +306,7 @@
                 return 1
             fi
 
-            for pkg in wget curl grep gawk sed 7zip; do
+            for pkg in wget curl grep gawk sed 7zip flatpak; do
                 case "$pkg" in
                     gawk) cmd="awk" ;;
                     7zip) cmd="7z" ;;
@@ -329,7 +329,7 @@
 	
 	InstallArchDeps(){
 		if archcheck; then
-		 local packages=("wget" "curl" "grep" "awk" "sed" "7zip")
+		 local packages=("wget" "curl" "grep" "awk" "sed" "7zip" "flatpak")
 	    local to_install=()
 	
 	    for pkg in "${packages[@]}"; do
