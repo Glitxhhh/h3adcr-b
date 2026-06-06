@@ -31,6 +31,8 @@
 	CloudRedirectLib="https://github.com/Selectively11/CloudRedirect/releases/download/linux-test/cloud_redirect.so"
     dgsc="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dgsc"
     dlm="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dlm"
+	cloudredirect="https://raw.githubusercontent.com/Selectively11/CloudRedirect/refs/heads/gh-pages/cloudredirect.flatpakrepo"
+    flathub="https://dl.flathub.org/repo/flathub.flatpakrepo"
     Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/sources.txt"
 	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab.desktop"
 	Headcrab_Icon="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/headcrab.png"
@@ -661,6 +663,13 @@
       if crconfigcheck; then
         echo "Downloading Latest Cloud Redirect Library"
         whereCR_Install
+		 echo "Installing Cloud Redirect App"
+		    flatpak remote-add --user --if-not-exists cloudredirect $cloudredirect
+		    flatpak remote-add --user --if-not-exists flathub $flathub
+		    flatpak --user update --appstream --noninteractive
+		    flatpak install --user flathub org.kde.Platform//6.10 --assumeyes --noninteractive
+		    flatpak install --user --reinstall org.cloudredirect.CloudRedirect --assumeyes --noninteractive
+		    update-desktop-database
         wget -O cloud_redirect.so "$CloudRedirectLib" &> /dev/null
         echo "Latest Cloud Redirect Library Downloaded"
       else
