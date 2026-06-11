@@ -2,7 +2,7 @@
 set -eu
 
     #Headcrab Compatibile Client Version
-    HeadcrabCompatibleClientVer=1780352834
+    HeadcrabCompatibleClientVer=1781041600
     
     #Paths
     SCRIPT_DIR="$(dirname "$(realpath "$0")")"
@@ -29,7 +29,7 @@ set -eu
 	CloudRedirectLib="https://github.com/Selectively11/h3adcr-b/releases/download/linux-test/cloud_redirect.so"
     dgsc="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dgsc"
     dlm="https://github.com/Deadboy666/h3adcr-b-modul3s/raw/refs/heads/main/dlm"
-    Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/main/sources.txt"
+    Sources="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/cr-test/sources.txt"
 	Headcrab_Updater="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/cr-test/headcrab.desktop"
 	Headcrab_Icon="https://raw.githubusercontent.com/Deadboy666/h3adcr-b-modul3s/refs/heads/cr-test/headcrab-cr.png"
 	
